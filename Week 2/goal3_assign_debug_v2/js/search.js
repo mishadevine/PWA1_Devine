@@ -4,37 +4,37 @@
 	// Variable initialization (DO NOT FIX ANY OF THE BELOW VAR's)
 	var resultsDIV = document.getElementById("results"),
 		searchInput = document.forms[0].search,
-		currentSearch = '';
-
+		currentSearch = ''
+	;
 	
 	// Validates search query
-	var validate = function (query) {
-
-        // Trim whitespace from start and end of search query
-        while (query.charAt(0) == " ") {
-            query = query.substring(1, query.length);
-        }
-        while (query.charAt(query.length - 1) === "") {
+	var validate = function(query){
+		
+		// Trim whitespace from start and end of search query
+		while(query.charAt(0) == " "){
+			query = query.substring(1, query.length);
+		};
+		while(query.charAt(query.length-1) === "") {
             query = query.substring(0, query.length - 1);
-
-
-            // Check search length, must have 3 characters
-            if (query.length < 3) {
-                alert("Your search query is too small, try again.");
-
-                // (DO NOT FIX THE LINE DIRECTLY BELOW)
-                searchInput.focus();
-                return;
-            }
-
-            search(query);
         }
-    };
+		
+		// Check search length, must have 3 characters
+		if(query.length < 3){
+			alert("Your search query is too small, try again.");
+			
+			// (DO NOT FIX THE LINE DIRECTLY BELOW)
+			searchInput.focus();
+			return;
+		};
+		
+		search(query);
+	};
+	
 	// Finds search matches
 	var search = function(query){
 		
 		// split the user's search query string into an array
-		var queryArray = query.join(" ");
+		var queryArray = query.split(" ");
 		
 		// array to store matched results from database.js
 		var results = [];
@@ -45,26 +45,27 @@
             // each db[i] is a single video item, each title ends with a pipe "|"
             // save a lowercase variable of the video title
             var dbTitleEnd = db[i].indexOf('|');
-            var dbItem = db[i].toLowerCase().substring(0, dbTitleEnd);
+            var dbitem = db[i].toLowerCase().substring(0, dbTitleEnd);
 
             // loop through the user's search query words
             // save a lowercase variable of the search keyword
             for (var ii = 0, jj = queryArray.length; ii < jj; ii++) {
-                var qItem = queryArray[ii].toLowerCase();
+                var qitem = queryArray[ii].toLowerCase();
 
                 // is the keyword anywhere in the video title?
                 // If a match is found, push full db[i] into results array
-                var compare = dbItem.indexOf(qItem);
+                var compare = dbitem.indexOf(qitem);
                 if (compare !== -1) {
                     results.push(db[i]);
                 }
+
             }
         }
 		
 		results.sort();
 		
 		// Check that matches were found, and run output functions
-		if(results.length = 0){
+		if(results.length == 0){
 			noMatch();
 		}else{
 			showMatches(results);
@@ -108,7 +109,7 @@
 	
 	// The onsubmit event will be reviewed in upcoming Course Material.
 	// THE LINE DIRECTLY BELOW IS CORRECT
-	document.forms[0].onSubmit = function() {
+	document.forms[0].onsubmit = function() {
         var query = searchInput.value;
         validate(query);
 

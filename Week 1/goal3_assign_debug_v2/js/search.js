@@ -27,14 +27,14 @@
 			return;
 		}
 
-            search(query);
+
 	}
 
 	// Finds search matches
 	var search = function(query) {
 
         // split the user's search query string into an array
-        var queryArray = query.join(" ");
+        var queryArray = query.split(" ");
 
      // array to store matched results from database.js
         var results = [];
@@ -65,7 +65,7 @@
 		results.sort();
 		
 		// Check that matches were found, and run output functions
-		if(results.length = 0){
+		if(results.length == 0){
 			noMatch();
 		}else{
 			showMatches(results);
@@ -88,8 +88,9 @@
         var html = '<p>Results</p>',
             title,
             url
-    };
-		
+            ;
+
+
 		// loop through all the results search() function
 		for(var i=0, j=results.length; i<j; i++){
 		
@@ -105,8 +106,9 @@
 			html += '<p><a href=' + url + '>' + title + '</a></p>';
 		}
 		resultsDIV.innerHTML = html; //THIS LINE IS CORRECT.
+
 	};
-	
+
 	// The onsubmit event will be reviewed in upcoming Course Material.
 	// THE LINE DIRECTLY BELOW IS CORRECT
 	document.forms[0].onSubmit = function() {
